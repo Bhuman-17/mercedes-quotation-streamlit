@@ -1,0 +1,8 @@
+MERCEDES-BENZ PROFORMA QUOTATION - QUICK START
+
+1. Open PowerShell in this project folder.
+2. Run: powershell -NoProfile -ExecutionPolicy Bypass -File .\setup.ps1
+3. Run: powershell -NoProfile -ExecutionPolicy Bypass -File .\run.ps1
+
+This project uses a Python 3.13-compatible runtime via uv.
+No PostgreSQL/Neon/database setup is required in this version.

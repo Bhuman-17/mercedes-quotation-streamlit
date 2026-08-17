@@ -1,0 +1,10 @@
+Mercedes-Benz Proforma Quotation - v3 changes
+
+1. Generated quotation PDF is now limited to 2 landscape A4 pages with readable quotation values.
+2. Star Finance Security Deposit is fixed at 0 and locked in the UI and calculation engine.
+3. Tenure dropdown limits:
+   - Star Agility+: 12, 24, 36, 48, 60 months
+   - Star Finance: 12, 24, 36, 48, 60, 72, 84 months
+4. Security Deposit and Net Disbursement values are right-aligned in the finance section.
+5. The Particulars/Remark cell for 'Any other offer (if applicable)' is now editable and is included in the downloaded PDF.
+6. Existing handling-charge lock, manual downpayment/loan fields, print, and PDF download behavior are preserved.
