@@ -1,0 +1,15 @@
+Mercedes Quotation v4 - Dynamic Reference Masters
+
+1. Model dropdown is sourced from reference/Price List Compilation.xlsx.
+2. Ex-Showroom Price is read from the latest/right-most Ex-Showroom column in that workbook.
+3. Powertrain is derived from the current pricing model: Petrol, Diesel, or Electric.
+4. Star Agility+ now includes Annual Mileage (10,000 / 15,000 / 20,000 Km).
+5. Star Agility+ RV Grid Percentage is fetched from reference/RV Grid.xlsx using model family, powertrain, mileage, and tenure.
+6. Electric/BEV models (e.g. CLA BEV/EQA) display Electric in the quotation but read the single primary rate block used by the RV workbook.
+7. Buyback Value is read-only and calculated as RV % x Net Ex-Showroom Price.
+8. Star Finance logic remains independent from this RV Grid.
+9. Both reference workbooks are data-driven. Replace the files using the SAME filenames and restart/redeploy; no rate/price code changes are required.
+
+Required filenames:
+- reference/Price List Compilation.xlsx
+- reference/RV Grid.xlsx

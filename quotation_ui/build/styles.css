@@ -1,0 +1,1223 @@
+/* =========================================================
+   GLOBAL
+   ========================================================= */
+
+:root {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #111;
+  background: #f1f2f4;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: #f1f2f4;
+  overflow-x: hidden;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+}
+
+
+/* =========================================================
+   HOME PAGE
+   ========================================================= */
+
+.home-page {
+  width: 100%;
+
+  /*
+    IMPORTANT:
+    Do not use 100vh here because Streamlit custom components
+    run inside an iframe. After visiting a long quotation,
+    the iframe can become several thousand pixels tall.
+  */
+  min-height: 880px;
+
+  padding: 64px 28px;
+
+  background-image: url("home-bg.png");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+
+  position: relative;
+
+  overflow: hidden;
+}
+
+.home-overlay {
+  min-height: 752px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 28px 0;
+}
+
+.home-hero {
+  width: min(1040px, 100%);
+
+  margin: 0 auto 44px;
+
+  padding: 42px 48px;
+
+  color: white;
+
+  background: rgba(0, 0, 0, 0.78);
+
+  border: 1px solid rgba(255, 255, 255, 0.22);
+
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.18);
+}
+
+.brand-kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.home-hero h1 {
+  margin: 10px 0 10px;
+
+  font-size: clamp(34px, 5vw, 58px);
+
+  font-weight: 400;
+
+  letter-spacing: -0.03em;
+}
+
+.home-hero p {
+  margin: 0;
+
+  color: #cfcfcf;
+
+  font-size: 16px;
+}
+
+.quotation-type-grid {
+  width: min(1040px, 100%);
+
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 18px;
+}
+
+.type-card {
+  min-height: 240px;
+
+  padding: 28px;
+
+  display: flex;
+  flex-direction: column;
+
+  text-decoration: none;
+
+  background: rgba(255, 255, 255, 0.94);
+
+  border: 1px solid rgba(255, 255, 255, 0.65);
+
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+
+  transition:
+    transform 0.16s ease,
+    box-shadow 0.16s ease,
+    border-color 0.16s ease;
+}
+
+.type-card:hover {
+  transform: translateY(-4px);
+
+  box-shadow: 0 20px 46px rgba(0, 0, 0, 0.13);
+
+  border-color: #8c8f93;
+}
+
+.type-card-icon {
+  width: 42px;
+  height: 42px;
+
+  border-radius: 50%;
+
+  display: grid;
+  place-items: center;
+
+  background: #111;
+
+  color: #fff;
+
+  font-size: 18px;
+
+  margin-bottom: 24px;
+}
+
+.type-card h2 {
+  margin: 0 0 8px;
+
+  font-size: 24px;
+
+  font-weight: 500;
+}
+
+.type-card p {
+  margin: 0;
+
+  color: #63676c;
+
+  line-height: 1.5;
+}
+
+.type-card span {
+  margin-top: auto;
+
+  font-weight: 700;
+
+  font-size: 14px;
+}
+
+.type-card-button {
+  width: 100%;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  font: inherit;
+
+  color: inherit;
+
+  appearance: none;
+
+  border-radius: 0;
+}
+
+
+/* =========================================================
+   EDITOR PAGE
+   ========================================================= */
+
+.editor-page {
+  min-height: 100vh;
+
+  padding: 20px 24px 46px;
+}
+
+.component-editor-page {
+  background: #f1f2f4;
+}
+
+.editor-topbar {
+  width: min(1220px, 100%);
+
+  margin: 0 auto 14px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  font-size: 14px;
+}
+
+.editor-topbar > div {
+  display: flex;
+
+  gap: 14px;
+
+  align-items: center;
+}
+
+.back-link {
+  text-decoration: none;
+
+  color: #3d4146;
+}
+
+.back-button {
+  border: 0;
+
+  background: transparent;
+
+  padding: 0;
+
+  cursor: pointer;
+
+  font: inherit;
+}
+
+.topbar-draft {
+  padding: 5px 10px;
+
+  background: #e4e6e8;
+
+  border-radius: 999px;
+
+  color: #555b61;
+
+  font-size: 12px;
+}
+
+.quotation-scroll {
+  width: 100%;
+
+  overflow-x: auto;
+
+  padding-bottom: 6px;
+}
+
+
+/* =========================================================
+   QUOTATION SHEET
+   ========================================================= */
+
+.quotation-sheet {
+  width: 1164px;
+
+  margin: 0 auto;
+
+  padding: 14px 14px 22px;
+
+  background: white;
+
+  color: #000;
+
+  box-shadow: 0 10px 38px rgba(0, 0, 0, 0.12);
+
+  font-size: 12px;
+
+  line-height: 1.25;
+}
+
+
+/* =========================================================
+   PROFORMA TITLE
+   ========================================================= */
+
+.proforma-title {
+  height: 32px;
+
+  display: grid;
+
+  place-items: center;
+
+  border: 2px solid #111;
+
+  font-size: 16px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.02em;
+}
+
+
+/* =========================================================
+   QUOTATION HEADER
+   ========================================================= */
+
+.quote-header {
+  min-height: 122px;
+
+  display: grid;
+
+  grid-template-columns:
+    29%
+    43%
+    28%;
+
+  border-left: 2px solid #111;
+  border-right: 2px solid #111;
+  border-bottom: 2px solid #111;
+}
+
+.company-address,
+.customer-details,
+.vehicle-details {
+  padding: 15px 10px 8px;
+}
+
+.company-address {
+  line-height: 1.42;
+}
+
+.company-address strong {
+  display: block;
+
+  margin-bottom: 2px;
+}
+
+.editable-company .cell-input {
+  margin-top: 4px;
+
+  text-align: left;
+
+  background: #dedede;
+}
+
+
+/* =========================================================
+   CUSTOMER DETAILS - FIXED ALIGNMENT
+   ========================================================= */
+
+.customer-details {
+  padding: 15px 12px 8px;
+}
+
+.customer-details .customer-field-line {
+  width: 100%;
+
+  min-height: 31px;
+
+  display: grid;
+
+  grid-template-columns:
+    180px
+    minmax(0, 1fr);
+
+  align-items: center;
+
+  column-gap: 10px;
+}
+
+.customer-details
+.customer-field-line
+.field-label {
+  width: 180px;
+
+  display: block;
+
+  font-weight: 700;
+
+  white-space: nowrap;
+
+  text-align: left;
+}
+
+.customer-details
+.customer-field-line
+.field-input-wrap {
+  width: 100%;
+
+  min-width: 0;
+}
+
+.customer-details
+.customer-field-line
+.field-input-wrap
+.cell-input {
+  display: block;
+
+  width: 100%;
+
+  height: 29px;
+
+  margin: 0;
+
+  padding: 3px 7px;
+
+  box-sizing: border-box;
+
+  background: #d8d8d8;
+
+  border: 0;
+
+  border-radius: 0;
+
+  outline: none;
+
+  color: #000;
+}
+
+.customer-details
+.customer-field-line
+.field-input-wrap
+.cell-input:focus {
+  background: #ececec;
+
+  box-shadow: inset 0 0 0 2px #777;
+}
+
+
+/* =========================================================
+   VEHICLE DETAILS
+   ========================================================= */
+
+.vehicle-details .field-line {
+  min-height: 27px;
+
+  display: grid;
+
+  grid-template-columns:
+    90px
+    minmax(0, 1fr);
+
+  align-items: center;
+
+  column-gap: 8px;
+}
+
+.validity {
+  margin-top: 10px;
+
+  text-align: center;
+
+  font-style: italic;
+
+  font-weight: 700;
+
+  font-size: 13px;
+}
+
+.quote-date {
+  text-align: center;
+
+  font-weight: 700;
+
+  margin-bottom: 10px;
+}
+
+.quote-number {
+  text-align: center;
+
+  color: #636363;
+
+  font-size: 10px;
+
+  margin-top: -7px;
+
+  margin-bottom: 8px;
+}
+
+
+/* =========================================================
+   GENERIC INPUTS
+   ========================================================= */
+
+.cell-input {
+  width: 100%;
+
+  height: 25px;
+
+  border: 0;
+
+  outline: 0;
+
+  padding: 2px 5px;
+
+  background: #d8d8d8;
+
+  color: #000;
+
+  border-radius: 0;
+}
+
+.cell-input:focus {
+  box-shadow: inset 0 0 0 2px #777;
+
+  background: #ececec;
+}
+
+.cell-input.numeric {
+  text-align: right;
+}
+
+
+/* =========================================================
+   PERCENTAGE INPUT
+   ========================================================= */
+
+.percent-input-wrap {
+  display: flex;
+
+  align-items: center;
+
+  background: #d8d8d8;
+
+  padding-right: 5px;
+}
+
+.percent-input-wrap .cell-input {
+  padding-right: 2px;
+}
+
+
+/* =========================================================
+   COMMON TABLES
+   ========================================================= */
+
+.quote-table,
+.finance-table,
+.payment-table {
+  width: 100%;
+
+  border-collapse: collapse;
+
+  table-layout: fixed;
+}
+
+.quote-table th,
+.quote-table td,
+.finance-table th,
+.finance-table td,
+.payment-table th,
+.payment-table td {
+  border: 1px solid #000;
+
+  padding: 2px 4px;
+
+  vertical-align: middle;
+}
+
+
+/* =========================================================
+   MAIN QUOTATION TABLE
+   ========================================================= */
+
+.quote-table
+.column-headings
+th {
+  height: 25px;
+
+  background: #fff;
+
+  font-weight: 700;
+
+  text-align: center;
+}
+
+.quote-table td:nth-child(1) {
+  width: 23%;
+}
+
+.quote-table td:nth-child(2) {
+  width: 34%;
+}
+
+.quote-table td:nth-child(3) {
+  width: 14%;
+}
+
+.quote-table td:nth-child(4) {
+  width: 10%;
+}
+
+.quote-table td:nth-child(5) {
+  width: 19%;
+}
+
+
+/* =========================================================
+   SECTION TITLES
+   ========================================================= */
+
+.section-cell,
+.section-title {
+  height: 24px;
+
+  background: #000;
+
+  color: #fff;
+
+  text-align: center;
+
+  font-weight: 700;
+
+  border: 1px solid #000;
+}
+
+.section-title {
+  margin-top: 14px;
+
+  display: grid;
+
+  place-items: center;
+}
+
+
+/* =========================================================
+   CATEGORY
+   ========================================================= */
+
+.category-cell {
+  text-align: center;
+
+  font-weight: 700;
+
+  background: #fff;
+}
+
+.label-cell {
+  height: 25px;
+}
+
+.label-cell.strong,
+.strong {
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   AMOUNT CELLS
+   ========================================================= */
+
+.amount-cell {
+  padding: 0 !important;
+
+  text-align: right;
+
+  background: #d8d8d8;
+}
+
+.amount-cell:not(:has(.cell-input)) {
+  padding: 2px 6px !important;
+}
+
+.shade-cell {
+  background: #d8d8d8;
+}
+
+.remark-cell {
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   CALCULATED / TOTAL ROWS
+   ========================================================= */
+
+.calculated-row .label-cell {
+  font-weight: 700;
+}
+
+.calculated-row .amount-cell,
+.calculated-row .shade-cell {
+  background: #d3d3d3;
+}
+
+.total-row .label-cell,
+.total-row .amount-cell,
+.total-row .shade-cell {
+  background: #929292;
+
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   SPACER
+   ========================================================= */
+
+.spacer-row td {
+  height: 17px;
+
+  border: 0;
+
+  background: white;
+}
+
+
+/* =========================================================
+   FINANCE TABLE
+   ========================================================= */
+
+.finance-table {
+  margin-top: 0;
+}
+
+.finance-table td:nth-child(1) {
+  width: 23%;
+}
+
+.finance-table td:nth-child(2) {
+  width: 34%;
+}
+
+.finance-table td:nth-child(3),
+.finance-table th:nth-child(3) {
+  width: 14%;
+}
+
+.finance-table td:nth-child(4),
+.finance-table th:nth-child(4) {
+  width: 14%;
+}
+
+.finance-table td:nth-child(5) {
+  width: 15%;
+}
+
+.finance-table td,
+.finance-table th {
+  height: 25px;
+}
+
+.finance-table th {
+  background: white;
+
+  font-weight: 700;
+
+  text-align: center;
+}
+
+.finance-table td:nth-child(3),
+.finance-table td:nth-child(4) {
+  padding: 0;
+
+  text-align: right;
+}
+
+.finance-table .calculated-amount {
+  background: #d5d5d5;
+
+  padding: 2px 6px !important;
+}
+
+.finance-table .na-cell {
+  background: #d8d8d8;
+
+  text-align: center !important;
+
+  padding: 2px 4px !important;
+}
+
+.finance-table
+.finance-total
+td:nth-child(2),
+.finance-table
+.finance-total
+td:nth-child(3),
+.finance-table
+.finance-total
+td:nth-child(4) {
+  background: #929292;
+
+  font-weight: 700;
+
+  padding: 2px 6px !important;
+}
+
+.finance-category {
+  font-size: 12px;
+}
+
+.finance-blank {
+  background: #fff;
+}
+
+
+/* =========================================================
+   TENURE DROPDOWN
+   ========================================================= */
+
+.tenure-select {
+  width: 100%;
+
+  height: 100%;
+
+  min-height: 24px;
+
+  border: 0;
+
+  background: #d9d9d9;
+
+  color: #111;
+
+  text-align: right;
+
+  padding:
+    1px 22px
+    1px 4px;
+
+  outline: none;
+
+  border-radius: 0;
+}
+
+
+/* =========================================================
+   HANDLING CHARGES LOCKED ZERO
+   ========================================================= */
+
+.locked-zero {
+  display: block;
+
+  width: 100%;
+
+  text-align: right;
+
+  padding-right: 4px;
+
+  font-weight: 600;
+}
+
+
+
+/* Finance amount alignment */
+.finance-table .finance-right,
+.finance-table .finance-right span {
+  text-align: right !important;
+}
+
+.finance-table .finance-right span {
+  display: block;
+  width: 100%;
+  padding-right: 4px;
+}
+
+/* Editable offer name in Particulars/Remark */
+.remark-cell .cell-input {
+  width: 100%;
+  height: 24px;
+  background: #d8d8d8;
+  text-align: left;
+  padding: 2px 5px;
+}
+
+/* =========================================================
+   PAYMENT TABLE
+   ========================================================= */
+
+.payment-gap {
+  height: 25px;
+}
+
+.payment-table th {
+  height: 25px;
+
+  background: white;
+
+  font-weight: 700;
+
+  text-align: center;
+}
+
+.payment-table th:first-child {
+  text-align: left;
+}
+
+.payment-table td:first-child,
+.payment-table th:first-child {
+  width: 36%;
+}
+
+.payment-table td:nth-child(2),
+.payment-table th:nth-child(2) {
+  width: 30%;
+}
+
+.payment-table td:nth-child(3),
+.payment-table th:nth-child(3) {
+  width: 14%;
+}
+
+.payment-table td:nth-child(4),
+.payment-table th:nth-child(4) {
+  width: 20%;
+}
+
+.payment-table td {
+  min-height: 25px;
+}
+
+.payment-table td:nth-child(2),
+.payment-table td:nth-child(3) {
+  text-align: right;
+
+  padding: 0;
+}
+
+.payment-table td:nth-child(2):not(:has(.cell-input)),
+.payment-table td:nth-child(3):not(:has(.cell-input)) {
+  padding: 2px 6px;
+}
+
+.payment-calc {
+  background: #fff;
+}
+
+.mode-long {
+  line-height: 1.35;
+}
+
+
+/* =========================================================
+   SIGNATURE / ISSUED BY
+   ========================================================= */
+
+.issued-wrapper {
+  width: 320px;
+
+  margin: 34px 0 0 auto;
+
+  text-align: center;
+
+  font-size: 11px;
+}
+
+.signature-box {
+  height: 52px;
+
+  border: 2px solid #111;
+
+  margin-bottom: 5px;
+}
+
+
+/* =========================================================
+   DISCLAIMERS
+   ========================================================= */
+
+.disclaimers {
+  margin-top: 70px;
+
+  display: grid;
+
+  grid-template-columns:
+    1fr
+    1fr;
+
+  gap: 12px 24px;
+
+  font-size: 6.4px;
+
+  line-height: 1.25;
+
+  text-align: left;
+}
+
+.disclaimer-foot {
+  grid-column: 1 / 3;
+
+  font-style: italic;
+
+  font-weight: 700;
+
+  max-width: 720px;
+
+  margin: 0 auto;
+}
+
+
+/* =========================================================
+   BUTTONS BELOW QUOTATION
+   ========================================================= */
+
+.quotation-actions {
+  width: min(1164px, 100%);
+
+  margin: 20px auto 0;
+
+  display: flex;
+
+  justify-content: flex-end;
+
+  gap: 12px;
+}
+
+.quotation-actions button {
+  min-width: 170px;
+
+  padding: 12px 22px;
+
+  border-radius: 2px;
+
+  font-weight: 700;
+
+  border: 1px solid #111;
+
+  transition:
+    opacity 0.15s ease,
+    transform 0.15s ease;
+}
+
+.quotation-actions button:active {
+  transform: translateY(1px);
+}
+
+.quotation-actions button:disabled {
+  cursor: wait;
+
+  opacity: 0.6;
+}
+
+.secondary-button {
+  background: white;
+
+  color: #111;
+}
+
+.primary-button {
+  background: #111;
+
+  color: white;
+}
+
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+.status-message {
+  width: min(1164px, 100%);
+
+  margin: 12px auto 0;
+
+  padding: 11px 14px;
+
+  font-size: 13px;
+
+  border-left: 4px solid;
+
+  background: white;
+}
+
+.status-message.success {
+  border-color: #1f7a44;
+}
+
+.status-message.error {
+  border-color: #a72c2c;
+}
+
+.error-help {
+  margin-top: 5px;
+
+  color: #6a6e73;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1190px) {
+  .quotation-sheet {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 820px) {
+  .quotation-type-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-page {
+    min-height: auto;
+
+    padding: 24px 16px;
+
+    background-position: center center;
+
+    overflow: visible;
+  }
+
+  .home-overlay {
+    min-height: auto;
+
+    padding: 24px 0;
+  }
+
+  .home-hero {
+    padding: 32px 26px;
+  }
+
+  .editor-page {
+    padding-inline: 10px;
+  }
+}
+
+
+/* =========================================================
+   PRINT
+   ========================================================= */
+
+@media print {
+  body {
+    background: white;
+
+    -webkit-print-color-adjust: exact;
+
+    print-color-adjust: exact;
+  }
+
+  .editor-topbar,
+  .quotation-actions,
+  .status-message {
+    display: none !important;
+  }
+
+  .editor-page {
+    padding: 0;
+  }
+
+  .quotation-sheet {
+    box-shadow: none;
+
+    margin: 0;
+  }
+}
+/* =========================================================
+   MASTER-DATA DRIVEN FIELDS
+   ========================================================= */
+
+.master-select {
+  width: 100%;
+  min-height: 25px;
+  border: 0;
+  outline: 0;
+  padding: 2px 22px 2px 5px;
+  background: #d8d8d8;
+  color: #000;
+  border-radius: 0;
+}
+
+.master-value {
+  display: block;
+  width: 100%;
+  min-height: 25px;
+  padding: 4px 6px 2px;
+  background: #d3d3d3;
+  text-align: right;
+  font-weight: 600;
+}
+
+.vehicle-details .master-select {
+  height: 25px;
+}
+
+.rv-value {
+  padding-right: 4px;
+}

@@ -1,0 +1,12 @@
+MERCEDES-BENZ PROFORMA QUOTATION - QUICK START
+
+1. Keep these two master files in the reference folder using the exact filenames:
+   - Price List Compilation.xlsx
+   - RV Grid.xlsx
+2. Open PowerShell in this project folder.
+3. Run: powershell -NoProfile -ExecutionPolicy Bypass -File .\setup.ps1
+4. Run: powershell -NoProfile -ExecutionPolicy Bypass -File .\run.ps1
+
+The app reads Model / Powertrain / Ex-Showroom / Star Agility+ RV values from these workbooks dynamically.
+To update prices or RV rates, replace the relevant reference workbook and restart/redeploy.
+No PostgreSQL/Neon/database setup is required.
